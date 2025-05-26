@@ -17,7 +17,6 @@ public class LoginStepDef {
         driver= DriverFactory.getDriver();
         loginpage=new LoginPage(driver);
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        loginpage = new LoginPage(driver);
     }
 
 

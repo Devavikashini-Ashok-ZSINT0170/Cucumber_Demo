@@ -25,7 +25,8 @@ public class DriverFactory {
 
     public static void quitDriver(){
         if(driver!=null){
-            driver.quit();
+            driver.quit();// quiting the driver after one test case passed
+            driver=null;// after quiting to invoke the next session in this driver, we are making it has null
 
         }
     }

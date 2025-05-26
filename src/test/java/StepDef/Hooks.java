@@ -1,5 +1,6 @@
 package StepDef;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import utils.DriverFactory;
 
@@ -10,6 +11,7 @@ public class Hooks {
         DriverFactory.getDriver();
     }
 
+    @After
     public void tearDown(){
         DriverFactory.quitDriver();
     }
