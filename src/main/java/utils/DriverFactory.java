@@ -1,35 +1,54 @@
 package utils;
 
-//code for triggering the browsers
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverFactory {
 
     private static WebDriver driver;
 
-    // add more drivers that is cross browser testing
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            String browser = System.getProperty("firefox", "chrome").toLowerCase();
+            boolean isHeadless = System.getProperty("headless", "false").equalsIgnoreCase("true");
 
-    public static WebDriver getDriver(){
-        if(driver==null){
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            switch (browser) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    if (isHeadless) {
+                        chromeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
+                    }
+                    driver = new ChromeDriver(chromeOptions);
+                    break;
+
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (isHeadless) {
+                        firefoxOptions.addArguments("--headless");
+                    }
+                    driver = new FirefoxDriver(firefoxOptions);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Browser not supported: " + browser);
+            }
+
             driver.manage().window().maximize();
-
         }
 
         return driver;
     }
 
-    public static void quitDriver(){
-        if(driver!=null){
-            driver.quit();// quiting the driver after one test case passed
-            driver=null;// after quiting to invoke the next session in this driver, we are making it has null
-
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
         }
     }
-
-
 }

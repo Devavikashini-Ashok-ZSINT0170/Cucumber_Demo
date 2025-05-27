@@ -7,12 +7,13 @@ import utils.DriverFactory;
 public class Hooks {
 
     @Before
-    public void setUp(){
-        DriverFactory.getDriver();
+    public void setUp() {
+        System.out.println("Running test on browser: " + System.getProperty("firefox", "chrome"));
+        DriverFactory.getDriver();  // this should initialize browser based on Jenkins param
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         DriverFactory.quitDriver();
     }
 }
