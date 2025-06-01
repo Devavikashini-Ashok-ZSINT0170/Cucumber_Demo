@@ -12,7 +12,7 @@ Feature: Login function for orange HRM website
       | username | password  |
       | Admin    | admin123  |
 
-    Scenario Outline: TC_002 Invali login for orange HRM
+    Scenario Outline: TC_002 Invalid login for orange HRM
       Given user is on the login page
       And user enters "<username>" and "<password>"
       Then user clicks the login button

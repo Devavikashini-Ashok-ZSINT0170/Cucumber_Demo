@@ -38,8 +38,8 @@ public class ElementUtils {
         element.click();
     }
 
-    public void setText(By locator,String textToBeEntered)
-    {    WebElement element=driver.findElement(locator);
+    public void setText(By locator,String textToBeEntered)    {
+        WebElement element=driver.findElement(locator);
         element.sendKeys(textToBeEntered);
 
     }
